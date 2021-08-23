@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 3.7)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(BODY_CONTROL true)
 set(DEBUG true)
 
 add_definitions(-std=c++17)
-
 
 set(CXX_FLAGS "-Wall")
 # enable threading
@@ -18,9 +18,13 @@ set(CMAKE_USE_WIN32_THREADS_INIT 0)
 set(CMAKE_USE_PTHREADS_INIT 1)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 
+if(BODY_CONTROL)
+  add_definitions(-DBODY_CONTROL)
+  message("BODY_CONTROL MODE: ON")
+endif()
+
 if(DEBUG)
   add_definitions(-DDEBUG)
-
   message("DEBUG MODE: ON")
   set (CMAKE_BUILD_TYPE Debug)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Og")

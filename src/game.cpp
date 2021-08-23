@@ -4,15 +4,15 @@
 
 template <typename T>
 Game<T>::Game(std::size_t grid_width, std::size_t grid_height)
-    : peppe(grid_width, grid_height),
+    : player_(grid_width, grid_height),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)),
       max_width_(static_cast<int>(grid_width)),
       max_height_(static_cast<int>(grid_height)) {
-  peppe.setPosition(0, (int)(0.9 * grid_height));
+  player_.setPosition(0, (int)(0.9 * grid_height));
 
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 6; i++) {
     Obstacle p(grid_width, grid_height);
     p.setPosition(grid_width + 10 * i, (int)(0.9 * grid_height));
     p.color = Colors().Green;
@@ -34,14 +34,14 @@ void Game<T>::Run(T& controller, Renderer& renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    controller.HandleInput(running, peppe);
+    controller.HandleInput(running, player_);
+
     Update();
+
     renderer.ClearScreen();
     for (Obstacle& o : obstacles_) renderer.PrepareRendering(o);
-    renderer.PrepareRendering(peppe);
-    // renderer.PrepareRendering(peppe);
+    renderer.PrepareRendering(player_);
     renderer.Render();
-    // renderer.Render(snake, food, obstacles_);
 
     frame_end = SDL_GetTicks();
 
@@ -66,30 +66,19 @@ void Game<T>::Run(T& controller, Renderer& renderer,
   }
 }
 
-// template <typename T>
-// void Game<T>::PlaceObstacles() {
-//   for (SDL_Point& o : obstacles_) {
-//     o.x = o.x - 1;
-//     std::cout << max_width_ << std::endl;
-//     if (o.x < 0) {
-//       o.x = max_width_ + 1;
-//     }
-//   }
-// }
-
 template <typename T>
 void Game<T>::Update() {
-  if (!peppe.alive) return;
+  
+  if (!player_.alive) return;
 
-  // snake.Update();
-  peppe.Update();
+  player_.Update();
 
   int x_rand = random_w(engine);
   for (int i = 0; i < obstacles_.size(); i++) {
     if (obstacles_[i].x < 0)
       obstacles_[i].x += 100 * i * obstacles_[i].speed + max_width_;
     obstacles_[i].Update();
-    // if(o.colliding(peppe))peppe.Died();
+    // if(o.colliding(player_))player_.Died();
     if (obstacles_[i].speed < 0.5) obstacles_[i].speed += 0.02;
   }
   score++;

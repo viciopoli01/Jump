@@ -40,7 +40,7 @@ Renderer::~Renderer() {
 
 void Renderer::ClearScreen() {
   // Clear screen
-  SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
+  SDL_SetRenderDrawColor(sdl_renderer, 91, 194, 251, 0xFF);
   SDL_RenderClear(sdl_renderer);
 }
 void Renderer::PrepareRendering(GameObject &element) {
@@ -49,14 +49,12 @@ void Renderer::PrepareRendering(GameObject &element) {
   block.h = screen_height / grid_height;
 
   // Render the obstacles
-  // for (GameObject const &o : elements) {
   block.x = static_cast<int>(element.x) * block.w;
   block.h = (screen_height / grid_height);
   block.y = static_cast<int>(element.y) * block.h;
   SDL_SetRenderDrawColor(sdl_renderer, element.color.r, element.color.g,
                          element.color.b, element.color.a);
   SDL_RenderFillRect(sdl_renderer, &block);
-  //}
 }
 
 void Renderer::Render() {

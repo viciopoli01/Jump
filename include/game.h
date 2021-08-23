@@ -28,7 +28,7 @@ class Game {
   std::uniform_int_distribution<int> random_w;
   std::uniform_int_distribution<int> random_h;
 
-  Player peppe;
+  Player player_;
   std::vector<Obstacle> obstacles_;
   float speed_{0.01};  // pixels per iteration
   int score{0};
