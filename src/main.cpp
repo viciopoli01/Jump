@@ -16,10 +16,10 @@ int main() {
   body_controller.start(0);
 
   Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
-  Controller controller;
+  // Controller controller;
   
-  Game<Controller> game(kGridWidth, kGridHeight);
-  game.Run(controller, renderer, kMsPerFrame);
+  Game<BodyController> game(kGridWidth, kGridHeight);
+  game.Run(body_controller, renderer, kMsPerFrame);
   
   // Game<BodyController> game(kGridWidth, kGridHeight);
   // game.Run(body_controller, renderer, kMsPerFrame);

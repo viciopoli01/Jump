@@ -10,13 +10,11 @@ Game<T>::Game(std::size_t grid_width, std::size_t grid_height)
       random_h(0, static_cast<int>(grid_height - 1)),
       max_width_(static_cast<int>(grid_width)),
       max_height_(static_cast<int>(grid_height)) {
-        
-  peppe.y = (int)(0.9 * grid_height);
+  peppe.setPosition(0, (int)(0.9 * grid_height));
 
   for (int i = 0; i < 5; i++) {
     Obstacle p(grid_width, grid_height);
-    p.x = grid_width + 10 * i;
-    p.y = (int)(0.9 * grid_height);
+    p.setPosition(grid_width + 10 * i, (int)(0.9 * grid_height));
     p.color = Colors().Green;
     obstacles_.emplace_back(p);
   }
@@ -36,7 +34,7 @@ void Game<T>::Run(T& controller, Renderer& renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    // controller.HandleInput(running, snake);
+    controller.HandleInput(running, peppe);
     Update();
     renderer.ClearScreen();
     for (Obstacle& o : obstacles_) renderer.PrepareRendering(o);
@@ -87,13 +85,14 @@ void Game<T>::Update() {
   peppe.Update();
 
   int x_rand = random_w(engine);
-  for (Obstacle& o : obstacles_) {
-    if (o.x < 0) o.x += x_rand * o.speed + max_width_;
-    o.Update();
-    if(o.colliding(peppe))peppe.Died();
-    o.speed+=0.002;
+  for (int i = 0; i < obstacles_.size(); i++) {
+    if (obstacles_[i].x < 0)
+      obstacles_[i].x += 100 * i * obstacles_[i].speed + max_width_;
+    obstacles_[i].Update();
+    // if(o.colliding(peppe))peppe.Died();
+    if (obstacles_[i].speed < 0.5) obstacles_[i].speed += 0.02;
   }
-
+  score++;
 }
 
 template <typename T>

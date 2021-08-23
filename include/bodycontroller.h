@@ -18,7 +18,6 @@
 #include <thread>
 #include <player.h>
 
-enum Commands { UP = 0, DOWN, LEFT, RIGHT , NOTHING};
 
 template <typename T>
 class MessageQueue {
@@ -64,15 +63,13 @@ class BodyController : GeneralController {
   cv::VideoCapture cap_;
   bool end_game_ = false;
 
-  MessageQueue<Commands> queue_;
+  MessageQueue<Player::Action> queue_;
 
   int margin_x_, margin_y_, image_width_, image_height_;
   int counter_update_ = 0;
-  const int back_update_rate_ = 5;
+  const int back_update_rate_ = 2;
 
   cv::Point prev_center_;
-
-  Commands prev_command_;
 
   std::thread *thr_;
 };

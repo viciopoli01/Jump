@@ -57,7 +57,7 @@ void BodyController::drawBox() {
 
 void BodyController::computeCommand() {
   // set the command to nothing
-  Commands cmd = NOTHING;
+  Player::Action cmd = Player::Action::STAY;
 
   // threshold the image
   cv::threshold(difference_, difference_, 50, 255, cv::THRESH_BINARY);
@@ -80,42 +80,20 @@ void BodyController::computeCommand() {
 
   // check the norm of the movement, is it enoght or it is noise?
   double norm = cv::norm(diff);
-  if (norm > 200) prev_center_ = curr_center;
-
-  // the body is moving to the left or the right
-  if (abs(diff.x) > abs(diff.y) && prev_command_ != LEFT &&
-      prev_command_ != RIGHT) {
-    // negative x means movemnt to the right
-    if (diff.x < 0) {
-      cmd = RIGHT;
-    }
-
-    // positive x means movemnt to the left
-    if (diff.x > 0) {
-      cmd = LEFT;
-    }
-  }
-
+  
   // the body is moving up or down
-  if (abs(diff.x) < abs(diff.y) && prev_command_ != UP &&
-      prev_command_ != DOWN) {
+  if (norm > 100 && abs(diff.x) < abs(diff.y)) {
     // negative y means movemnt to the top
     if (diff.y < 0) {
-      cmd = UP;
+      cmd = Player::Action::JUMP;
     }
 
     // positive x means movemnt to the bottom
     if (diff.y > 0) {
-      cmd = DOWN;
+      cmd = Player::Action::STAY;
     }
   }
-
-#ifdef DEBUG
-  std::cout << "Norm: " << norm << std::endl;
-  std::cout << "Dir: " << cmd << std::endl;
-#endif
   prev_center_ = curr_center;
-  prev_command_ = cmd;
   queue_.send(std::move(cmd));
 }
 
@@ -126,23 +104,11 @@ void BodyController::HandleInput(bool &running, Player &player) {
     end_game_ = true;
   }
   switch (queue_.receive()) {
-    case UP:
-      std::cout << "UP" << std::endl;
-      ChangeDirection(snake, Snake::Direction::kUp, Snake::Direction::kDown);
-      break;
-    case DOWN:
-      std::cout << "DOWN" << std::endl;
-      ChangeDirection(snake, Snake::Direction::kDown, Snake::Direction::kUp);
-      break;
-    case LEFT:
-      std::cout << "LEFT" << std::endl;
-      ChangeDirection(snake, Snake::Direction::kLeft, Snake::Direction::kRight);
-      break;
-    case RIGHT:
-      std::cout << "RIGHT" << std::endl;
-      ChangeDirection(snake, Snake::Direction::kRight, Snake::Direction::kLeft);
+    case Player::Action::JUMP:
+      std::cout << "JUMP" << std::endl;
+      ChangeDirection(player, Player::Action::JUMP);
       break;
     default:
-      std::cout << "NO COMMAND" << std::endl;
+      ChangeDirection(player, Player::Action::STAY);
   }
 }

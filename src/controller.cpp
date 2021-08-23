@@ -2,7 +2,6 @@
 #include <iostream>
 #include "SDL.h"
 
-
 void Controller::HandleInput(bool &running, Player &player) {
   SDL_Event e;
   while (SDL_PollEvent(&e)) {
@@ -10,7 +9,7 @@ void Controller::HandleInput(bool &running, Player &player) {
       running = false;
     } else if (e.type == SDL_KEYDOWN) {
       switch (e.key.keysym.sym) {
-        case SDLK_UP:
+        case SDLK_SPACE:
           ChangeDirection(player, Player::Action::JUMP);
           break;
         default:
