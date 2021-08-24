@@ -42,19 +42,32 @@ void Renderer::ClearScreen() {
   // Clear screen
   SDL_SetRenderDrawColor(sdl_renderer, 91, 194, 251, 0xFF);
   SDL_RenderClear(sdl_renderer);
+
+  SDL_Rect ground;
+  ground.x = 0;
+  ground.y = screen_height * PLAYER_POSITION;
+  ground.w = screen_width;
+  ground.h = screen_height * PLAYER_POSITION;
+  SDL_SetRenderDrawColor(sdl_renderer, 121, 145, 131, 255);
+  SDL_RenderFillRect(sdl_renderer, &ground);
+
+  // int d_x = screen_width / grid_width;
+  // int d_y = screen_height / grid_height;
+  // SDL_Rect cloud;
+
+  // for (int i = 0; i < 4; i++) {
+  //   cloud.x = 20 + (i * d_x);
+  //   cloud.y = screen_height * PLAYER_POSITION - i * d_y;
+  //   cloud.w = (10 - i*sqrt(i)) * d_x;
+  //   cloud.h = d_y;
+  //   SDL_SetRenderDrawColor(sdl_renderer, 255, 255, 255, 255);
+  //   SDL_RenderFillRect(sdl_renderer, &cloud);
+  // }
+
 }
 void Renderer::PrepareRendering(GameObject &element) {
-  SDL_Rect block;
-  block.w = screen_width / grid_width;
-  block.h = screen_height / grid_height;
-
-  // Render the obstacles
-  block.x = static_cast<int>(element.x) * block.w;
-  block.h = (screen_height / grid_height);
-  block.y = static_cast<int>(element.y) * block.h;
-  SDL_SetRenderDrawColor(sdl_renderer, element.color.r, element.color.g,
-                         element.color.b, element.color.a);
-  SDL_RenderFillRect(sdl_renderer, &block);
+  element.Render(sdl_renderer, screen_height, screen_width, grid_height, grid_width);
+  
 }
 
 void Renderer::Render() {

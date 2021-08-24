@@ -14,6 +14,9 @@ class Player : public GameObject {
     color = Colors().Blue;
     speed = 1.0;
   };
+    
+  void Render(SDL_Renderer *sdl_renderer, int screen_height, int screen_width, int grid_height, int grid_width);
+
   void Update();
   void Died();
 

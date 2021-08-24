@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <controller.h>
 #include <controller_general.h>
+#include <player.h>
 #include <snake.h>
 #include <condition_variable>
 #include <deque>
@@ -16,15 +17,13 @@
 #include <opencv2/videoio.hpp>
 #include <stdexcept>
 #include <thread>
-#include <player.h>
-
 
 template <typename T>
 class MessageQueue {
  public:
   void send(T &&message) {
     std::lock_guard<std::mutex> lck(_mtx);
-    // _queue.clear();
+    _queue.clear();
     _queue.push_back(std::move(message));
     _cond.notify_one();
   }
@@ -59,15 +58,16 @@ class BodyController : GeneralController {
   void drawBox();
   void readCamera();
 
-  cv::Mat frame_, prev_frame_, difference_;
+  cv::Mat frame_, prev_frame_, difference_, show_;
   cv::VideoCapture cap_;
   bool end_game_ = false;
 
   MessageQueue<Player::Action> queue_;
+  MessageQueue<bool> stop_camera_;
 
   int margin_x_, margin_y_, image_width_, image_height_;
   int counter_update_ = 0;
-  const int back_update_rate_ = 2;
+  const int back_update_rate_ = 5;
 
   cv::Point prev_center_;
 

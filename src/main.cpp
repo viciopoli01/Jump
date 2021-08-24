@@ -6,25 +6,27 @@
 #include "bodycontroller.h"
 
 int main() {
-  constexpr std::size_t kFramesPerSecond{60};
+  constexpr std::size_t kFramesPerSecond{30}; //same as camera rate
   constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
   constexpr std::size_t kScreenWidth{1280};
   constexpr std::size_t kScreenHeight{640};
   constexpr std::size_t kGridWidth{64};
   constexpr std::size_t kGridHeight{32};
-  BodyController body_controller;
-  body_controller.start(0);
 
   Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
-  // Controller controller;
-  
+
+#ifdef BODY_CONTROL
+  BodyController controller;
+  controller.start(0);
   Game<BodyController> game(kGridWidth, kGridHeight);
-  game.Run(body_controller, renderer, kMsPerFrame);
-  
-  // Game<BodyController> game(kGridWidth, kGridHeight);
-  // game.Run(body_controller, renderer, kMsPerFrame);
+#else
+  Controller controller;
+  Game<Controller> game(kGridWidth, kGridHeight);
+#endif
+
+  game.Run(controller, renderer, kMsPerFrame);
+
   std::cout << "Game has terminated successfully!\n";
   std::cout << "Score: " << game.GetScore() << "\n";
-  std::cout << "Size: " << game.GetSize() << "\n";
   return 0;
 }

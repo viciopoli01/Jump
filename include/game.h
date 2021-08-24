@@ -10,6 +10,7 @@
 #include "renderer.h"
 #include "snake.h"
 #include "types.h"
+#include "cloud.h"
 
 template <class T>
 class Game {
@@ -30,6 +31,7 @@ class Game {
 
   Player player_;
   std::vector<Obstacle> obstacles_;
+  std::vector<Cloud> clouds_;
   float speed_{0.01};  // pixels per iteration
   int score{0};
   const int max_width_, max_height_;

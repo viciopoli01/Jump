@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.7)
+project(Jump)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -33,8 +35,6 @@ else()
 endif()
 
 
-project(SnakeGym)
-
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 find_package(OpenCV REQUIRED)
@@ -43,6 +43,6 @@ include_directories(include ${SDL2_INCLUDE_DIRS} src)
 
 file(GLOB SOURCE "src/*.cpp")
 
-add_executable(SnakeGym ${SOURCE})
+add_executable(Jump ${SOURCE})
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
-target_link_libraries(SnakeGym ${SDL2_LIBRARIES} ${OpenCV_LIBRARIES})
+target_link_libraries(Jump ${SDL2_LIBRARIES} ${OpenCV_LIBRARIES})

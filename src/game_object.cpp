@@ -11,3 +11,4 @@ void GameObject::setSpeed(float speed) { this->speed = speed; }
 bool GameObject::colliding(GameObject const &a) const {
   return (int)this->x == (int)a.x && (int)this->y == (int)a.y;
 }
+

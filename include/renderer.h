@@ -1,12 +1,12 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <vector>
 #include <SDL_ttf.h>
+#include <math.h>
+#include <vector>
 #include "SDL.h"
 #include "game_object.h"
 #include "snake.h"
-
 
 class Renderer {
  public:

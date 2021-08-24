@@ -2,6 +2,7 @@
 #define GAME_OBJECT_H
 
 #include <types.h>
+#include "SDL.h"
 
 class GameObject {
  public:
@@ -12,6 +13,7 @@ class GameObject {
         y(grid_height / 2) {}
 
   virtual void Update() = 0;
+  virtual void Render(SDL_Renderer *sdl_renderer, int screen_height, int screen_width, int grid_height, int grid_width) = 0;
 
   float speed{0.1f};
   void setSpeed(float speed);

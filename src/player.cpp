@@ -12,7 +12,6 @@ void Player::Update() {
 
   if (!is_jumping_ && action == Player::Action::JUMP) {
     action = Player::Action::STAY;
-    std::cout << "Jump\n";
     is_jumping_ = true;
     speed = 10.0;
     Jump();
@@ -20,8 +19,6 @@ void Player::Update() {
 }
 
 void Player::Jump() {
-  std::cout << "Y : " << y << "\n";
-
   if (!jump_max_) {
     if (y > 20) {
       y -= 0.1 * speed;
@@ -53,4 +50,18 @@ void Player::Jump() {
 void Player::Died() {
   alive = false;
   color = Colors().Red;
+}
+
+void Player::Render(SDL_Renderer *sdl_renderer, int screen_height,
+                    int screen_width, int grid_height, int grid_width) {
+  SDL_Rect block;
+  block.w = screen_width / grid_width;
+  block.h = screen_height / grid_height;
+
+  // Render the obstacles
+  block.x = static_cast<int>(x) * block.w;
+  block.h = (screen_height / grid_height);
+  block.y = static_cast<int>(y) * block.h;
+  SDL_SetRenderDrawColor(sdl_renderer, color.r, color.g, color.b, color.a);
+  SDL_RenderFillRect(sdl_renderer, &block);
 }
