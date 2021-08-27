@@ -3,7 +3,7 @@
 
 #include <random>
 #include "SDL.h"
-#include "bodycontroller.h"
+#include "body_controller.h"
 #include "controller.h"
 #include "obstacle.h"
 #include "player.h"

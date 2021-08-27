@@ -3,7 +3,7 @@
 #include "game.h"
 #include "renderer.h"
 
-#include "bodycontroller.h"
+#include "body_controller.h"
 
 int main() {
   constexpr std::size_t kFramesPerSecond{30}; //same as camera rate

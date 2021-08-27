@@ -1,64 +1,91 @@
-#include "bodycontroller.h"
+#include "body_controller.h"
+
+BodyController::~BodyController() {
+  // wait for the thread to finish before
+  // destroying the obj
+  thr_->join();
+};
 
 void BodyController::start(int device_id) {
-#ifdef DEBUG
   cv::namedWindow("Movements tracker", cv::WINDOW_AUTOSIZE);
+
+#ifdef DEBUG
+  cv::namedWindow("Blob detection", cv::WINDOW_AUTOSIZE);
 #endif
-  // open selected camera using selected API
+  // open camera
   cap_.open(device_id, cv::CAP_ANY);
-  // check if we succeeded
+  // if cannot open the camera throw an exception
   if (!cap_.isOpened()) {
     throw std::runtime_error("Cannot read the camera...");
   }
+  // start the thread
   thr_ = new std::thread(&BodyController::readCamera, this);
 }
 
 void BodyController::readCamera() {
+  // to check if we are reading the first image
   bool not_first_ = false;
-  while (!end_game_) {
-    // wait for a new frame from camera and store it into 'frame'
+
+  // itereate untill the game end
+  while (!stop_) {
+    // read camera new colored frame
     cap_ >> frame_;
-    cvtColor(frame_, frame_, cv::COLOR_BGR2GRAY);
 
-    // check if we succeeded
-    if (frame_.empty()) {
-      throw std::runtime_error("Cannot read the camera...");
-    }
+    // store the colored image in show_, frame_ is going to be converted in a
+    // gray scale image
+    show_ = frame_;
 
+    // throw an exception if we are not able to read the image
+    if (frame_.empty()) throw std::runtime_error("Cannot read the camera...");
+
+    // if not the first frame we can start doing operation on the image
     if (not_first_) {
+      // check whether we can substruct the previous frame according to the
+      // back_update_rate_ we set
       if (counter_update_ == back_update_rate_) {
+        // reset the counter
         counter_update_ = 0;
+
+        // covert the frame to gray scale
+        cvtColor(frame_, frame_, cv::COLOR_BGR2GRAY);
+
+        // substract the previous frame to the current one
         difference_ = frame_ - prev_frame_;
-        show_ = frame_;
+
+        // update frame
+        prev_frame_ = frame_;
+
+        // compute the command to be sent
         computeCommand();
 
+        // show the image
         cv::imshow("Movements tracker", show_);
+#ifdef DEBUG
+        cv::imshow("Blob detection", difference_);
+#endif
         cv::waitKey(1);
       } else {
-
-        end_game_ = stop_camera_.receive();
+        // send player action STAY if no other commands are computed
         queue_.send(std::move(Player::Action::STAY));
       }
 
+      // check whether the game has ended
+      stop_ = stop_camera_.receive();
+
     } else {
+      // set we have already received a frame
       not_first_ = true;
+      // set image size
       image_width_ = difference_.size().width;
       image_height_ = difference_.size().height;
-      margin_x_ = (int)(0.3 * image_width_);
-      margin_y_ = (int)(0.3 * image_height_);
+
+      // init prev_center of the blob to the center of the image
       prev_center_ = cv::Point((int)image_width_ / 2, (int)image_height_ / 2);
     }
+
+    // update the counter
     counter_update_++;
-    prev_frame_ = frame_;
   }
-}
-
-void BodyController::drawBox() {
-  cv::Rect r =
-      cv::Rect((int)(image_width_ / 2) - margin_x_,
-               (int)(image_height_ / 2) - margin_y_, margin_x_, margin_y_);
-
-  cv::rectangle(difference_, r, cv::Scalar(255, 0, 0), 1, 8, 0);
 }
 
 void BodyController::computeCommand() {
@@ -82,9 +109,6 @@ void BodyController::computeCommand() {
   double norm = cv::norm(diff);
 
   if (norm > 50 && norm < 100) {
-    // convert the image to 3 channels, in such a way we can color it
-    cv::cvtColor(show_, show_, cv::COLOR_GRAY2BGR);
-
     cv::circle(show_, prev_center_, 5, cv::Scalar(0, 0, 255), -1);
     cv::arrowedLine(show_, prev_center_, curr_center, cv::Scalar(0, 0, 255));
     // the body is moving up or down
@@ -95,7 +119,9 @@ void BodyController::computeCommand() {
       }
     }
   }
+  // update the center position
   prev_center_ = curr_center;
+  // send the command
   queue_.send(std::move(cmd));
 }
 

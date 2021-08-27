@@ -4,7 +4,9 @@ project(Jump)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Set this flag to true if you want to paly jumping with yourself
 set(BODY_CONTROL true)
+# Set this flag to true if you want to debug the code
 set(DEBUG true)
 
 add_definitions(-std=c++17)
@@ -38,7 +40,14 @@ endif()
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 find_package(OpenCV REQUIRED)
+if(OpenCV_FOUND)
+message("OpenCV found")
+endif()
+
 find_package(SDL2 REQUIRED)
+if(SDL2_FOUND)
+message("SDL2 found")
+endif()
 include_directories(include ${SDL2_INCLUDE_DIRS} src)
 
 file(GLOB SOURCE "src/*.cpp")
