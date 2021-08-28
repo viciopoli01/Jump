@@ -169,4 +169,4 @@ Vincenzo: [polivicio@gmail.com](mailto:polivicio@gmail.com)
 [license-shield]: https://img.shields.io/github/license/viciopoli01/Jump.svg?style=for-the-badge
 [license-url]: https://github.com/viciopoli01/Jump/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/viciopoli01
+[linkedin-url]: https://linkedin.com/in/vincenzo-polizzi-602089146/
