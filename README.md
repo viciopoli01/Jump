@@ -155,7 +155,7 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the GNU General Public License v3.0. See `LICENSE` for more information.
 
 
 
@@ -179,15 +179,15 @@ Project Link: [https://github.com/viciopoli01/Jump](https://github.com/viciopoli
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/viciopoli01/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/viciopoli01/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/viciopoli01/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/viciopoli01/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/viciopoli01/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/viciopoli01/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/viciopoli01/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/viciopoli01/repo/issues
-[license-shield]: https://img.shields.io/github/license/viciopoli01/repo.svg?style=for-the-badge
-[license-url]: https://github.com/viciopoli01/repo/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/viciopoli01/Jump.svg?style=for-the-badge
+[contributors-url]: https://github.com/viciopoli01/Jump/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/viciopoli01/Jump.svg?style=for-the-badge
+[forks-url]: https://github.com/viciopoli01/Jump/network/members
+[stars-shield]: https://img.shields.io/github/stars/viciopoli01/Jump.svg?style=for-the-badge
+[stars-url]: https://github.com/viciopoli01/Jump/stargazers
+[issues-shield]: https://img.shields.io/github/issues/viciopoli01/Jump.svg?style=for-the-badge
+[issues-url]: https://github.com/viciopoli01/Jump/issues
+[license-shield]: https://img.shields.io/github/license/viciopoli01/Jump.svg?style=for-the-badge
+[license-url]: https://github.com/viciopoli01/Jump/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/viciopoli01
