@@ -34,7 +34,7 @@ C++ Nanodegree Program` . In particular it is a game where you need to jump with
 <br />
 <p align="center">
   <a href="https://github.com/viciopoli01/Jump">
-    <img src="media/jump.png" alt="Logo" width="80" height="80">
+    <img src="media/jump.png" alt="Logo" width="100" height="100">
   </a>
 
   <h3 align="center">Jump</h3>
