@@ -52,7 +52,7 @@ void Renderer::ClearScreen() {
   SDL_RenderFillRect(sdl_renderer, &ground);
 }
 
-void Renderer::PrepareRendering(GameObject &element) {
+void Renderer::PrepareRendering(GameObject& element) {
   element.Render(sdl_renderer, screen_height, screen_width);
 }
 
@@ -62,7 +62,7 @@ void Renderer::Render() {
 }
 
 void Renderer::UpdateWindowTitle(int score, int fps) {
-  std::string title{"Snake Score: " + std::to_string(score) +
+  std::string title{"Jump Score: " + std::to_string(score) +
                     " FPS: " + std::to_string(fps)};
   SDL_SetWindowTitle(sdl_window, title.c_str());
 }

@@ -6,6 +6,12 @@
 #include <mutex>
 
 namespace Jump {
+
+/**
+ * @brief MessageQueue class needed for intra threads communication.
+ * 
+ * @tparam T can be whatever threads need to communicate
+ */
 template <typename T>
 class MessageQueue {
  public:
@@ -31,6 +37,7 @@ class MessageQueue {
   std::condition_variable _cond;
   std::mutex _mtx;
 };
+
 }  // namespace Jump
 
 #endif

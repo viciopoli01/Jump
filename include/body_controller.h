@@ -2,16 +2,12 @@
 #define BODY_CONTROLLER_H
 
 #include <SDL.h>
-#include <controller.h>
 #include <controller_general.h>
 #include <message_queue.h>
 #include <player.h>
-#include <iostream>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
-#include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
-#include <opencv2/videoio.hpp>
 #include <stdexcept>
 #include <thread>
 

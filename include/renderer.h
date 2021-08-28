@@ -5,6 +5,7 @@
 #include <SDL_ttf.h>
 #include <game_object.h>
 #include <math.h>
+#include <stdarg.h>
 #include <vector>
 
 class Renderer {

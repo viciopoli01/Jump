@@ -5,9 +5,8 @@
 template <typename T>
 Game<T>::Game(std::size_t grid_width, std::size_t grid_height)
     : player_(grid_width, grid_height),
-      engine(dev()),
-      random_w(0, static_cast<int>(grid_width - 1)),
-      random_h(0, static_cast<int>(grid_height / 2)),
+      engine_(dev_()),
+      random_w_(0, static_cast<int>(grid_width - 1)),
       max_width_(static_cast<int>(grid_width)),
       max_height_(static_cast<int>(grid_height)) {
   player_.setPosition(0, (int)(PLAYER_POSITION * grid_height));
@@ -26,7 +25,7 @@ Game<T>::Game(std::size_t grid_width, std::size_t grid_height)
   }
   for (int i = 0; i < 3; i++) {
     Cloud c(grid_width, grid_height);
-    c.speed = c.speed * (3-i);
+    c.speed = c.speed * (3 - i);
     c.setPosition(grid_width + 10 * i, 60 * (i + 1));
     clouds_.emplace_back(c);
   }
@@ -65,7 +64,7 @@ void Game<T>::Run(T& controller, Renderer& renderer,
 
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000) {
-      renderer.UpdateWindowTitle(score, frame_count);
+      renderer.UpdateWindowTitle(score_, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
     }
@@ -85,31 +84,28 @@ void Game<T>::Update() {
 
   player_.Update();
   for (int i = 0; i < clouds_.size(); i++) {
-    if (clouds_[i].x < 0)
-      clouds_[i].x += i + max_width_;
+    if (clouds_[i].x < 0) clouds_[i].x += i + max_width_;
     clouds_[i].Update();
   }
 
-  int x_rand = random_w(engine);
+  int x_rand = random_w_(engine_);
   for (int i = 0; i < obstacles_.size(); i++) {
     if (obstacles_[i].x < 0)
       obstacles_[i].x += 100 * i * obstacles_[i].speed + max_width_;
     obstacles_[i].Update();
-    if(obstacles_[i].colliding(player_))player_.Died();
+    if (obstacles_[i].colliding(player_)) player_.Died();
     if (obstacles_[i].speed < 0.5) obstacles_[i].speed += 0.02;
   }
-  score++;
+  score_++;
 }
 
 template <typename T>
 int Game<T>::GetScore() const {
-  return score;
+  return score_;
 }
 
-template <typename T>
-int Game<T>::GetSize() const {
-  return 1;  // snake.size;
-}
-
+#ifdef BODY_CONTROL
 template class Game<BodyController>;
+#else
 template class Game<Controller>;
+#endif

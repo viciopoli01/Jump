@@ -58,7 +58,7 @@ class GameObject {
    * @param x new x position
    * @param y new y position
    */
-  void setPosition(float x, float y);
+  virtual void setPosition(float x, float y);
 
   /**
    * @brief Check whether the current obj and the object 'other' collide

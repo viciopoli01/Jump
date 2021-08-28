@@ -2,7 +2,7 @@
 
 void Player::setPosition(float x, float y) {
   this->y = y;
-  starting_y = y;
+  starting_y_ = y;
 }
 
 void Player::Update() {
@@ -31,14 +31,14 @@ void Player::Jump() {
     if (speed < 10.0)
       speed++;
     else {
-      y = starting_y;
+      y = starting_y_;
       jump_max_ = false;
       is_jumping_ = false;
     }
-    if (y < starting_y) {
+    if (y < starting_y_) {
       y += 0.1 * speed;
     } else {
-      y = starting_y;
+      y = starting_y_;
       jump_max_ = false;
       is_jumping_ = false;
     }
