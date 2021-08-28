@@ -5,8 +5,13 @@
 
 #include "body_controller.h"
 
-int main() {
-  constexpr std::size_t kFramesPerSecond{30}; //same as camera rate
+int main(int argc, char *argv[]) {
+  int camera_id = 0;
+  if (argc > 1) {
+    camera_id = std::atoi(argv[1]);
+  }
+
+  constexpr std::size_t kFramesPerSecond{30};  // same as camera rate
   constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
   constexpr std::size_t kScreenWidth{1280};
   constexpr std::size_t kScreenHeight{640};
@@ -17,7 +22,7 @@ int main() {
 
 #ifdef BODY_CONTROL
   BodyController controller;
-  controller.start(0);
+  controller.start(camera_id);
   Game<BodyController> game(kGridWidth, kGridHeight);
 #else
   Controller controller;

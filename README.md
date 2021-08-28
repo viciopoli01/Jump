@@ -57,9 +57,6 @@ C++ Nanodegree Program` . In particular it is a game where you need to jump with
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -81,26 +78,33 @@ C++ Nanodegree Program` . In particular it is a game where you need to jump with
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+<p align="center">
+<a href="https://github.com/viciopoli01/Jump">
+<img src="media/screenshot.png" alt="Logo" width="100%" height="100%">
+</a>
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-
-
-
-### Built With
-
-* []()
-* []()
-* []()
-
+Jump is the capstone project for the Udacity <a href="https://www.udacity.com/course/c-plus-plus-nanodegree--nd213">C++ Nanodegree Program</a> . In particular, it is a game where you need to jump with yourself to avoid obstacles. It uses the camera of your laptop to detect the movements. Check it out!
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
+Clone the repo and build the project. 
+Make sure you have all the requirements.
+
+```sh
+git clone git@github.com:viciopoli01/Jump.git
+cd Jump
+mkdir build 
+cd build
+cmake ..
+make
+./Jump
+```
+
+You can choose to control the game using the keyboard. Make sure to set to false then the flag `BODY_CONTROL` in the [CMakeLists.txt](https://github.com/viciopoli01/Jump/blob/main/CMakeLists.txt#L8) file.
+
+
 
 ### Prerequisites
 
