@@ -108,6 +108,7 @@ You can choose to control the game using the keyboard. Make sure to set to false
 To run the game you need to have:
 
 * A camera plugged to your computer (or the laptop camera).
+* Ubuntu 18.04 or higher version
 * OpenCV installed (tested with OpenCV 3.2.0)
 * SDL2 installed
 * Tested with gcc 7.5.0
