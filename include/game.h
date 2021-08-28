@@ -1,16 +1,15 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <SDL.h>
+#include <body_controller.h>
+#include <cloud.h>
+#include <controller.h>
+#include <obstacle.h>
+#include <player.h>
+#include <renderer.h>
+#include <types.h>
 #include <random>
-#include "SDL.h"
-#include "body_controller.h"
-#include "controller.h"
-#include "obstacle.h"
-#include "player.h"
-#include "renderer.h"
-#include "snake.h"
-#include "types.h"
-#include "cloud.h"
 
 template <class T>
 class Game {
@@ -23,7 +22,6 @@ class Game {
   int GetSize() const;
 
  private:
-
   std::random_device dev;
   std::mt19937 engine;
   std::uniform_int_distribution<int> random_w;

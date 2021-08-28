@@ -9,8 +9,7 @@ class Obstacle : public GameObject {
   Obstacle(int grid_width, int grid_height)
       : GameObject(grid_width, grid_height){};
   void Update();
-  void Render(SDL_Renderer *sdl_renderer, int screen_height, int screen_width,
-              int grid_height, int grid_width);
+  void Render(SDL_Renderer *sdl_renderer, int screen_height, int screen_width);
 
  private:
   int grid_width;

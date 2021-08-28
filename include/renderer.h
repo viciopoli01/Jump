@@ -1,12 +1,11 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <SDL.h>
 #include <SDL_ttf.h>
+#include <game_object.h>
 #include <math.h>
 #include <vector>
-#include "SDL.h"
-#include "game_object.h"
-#include "snake.h"
 
 class Renderer {
  public:
@@ -18,8 +17,6 @@ class Renderer {
   void PrepareRendering(GameObject &element);
   void Render();
 
-  void Render(Snake const snake, SDL_Point const &food,
-              std::vector<SDL_Point> const &obstacles);
   void UpdateWindowTitle(int score, int fps);
 
  private:

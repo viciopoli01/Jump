@@ -15,7 +15,7 @@ class Player : public GameObject {
     speed = 1.0;
   };
     
-  void Render(SDL_Renderer *sdl_renderer, int screen_height, int screen_width, int grid_height, int grid_width);
+  void Render(SDL_Renderer *sdl_renderer, int screen_height, int screen_width);
 
   void Update();
   void Died();

@@ -6,7 +6,6 @@
 #include <controller_general.h>
 #include <message_queue.h>
 #include <player.h>
-#include <snake.h>
 #include <iostream>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
@@ -16,6 +15,10 @@
 #include <stdexcept>
 #include <thread>
 
+/**
+ * @brief Controll the player jumping with yourself.
+ * Extend GeneralController class.
+ */
 class BodyController : GeneralController {
  public:
   /**

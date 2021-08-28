@@ -3,20 +3,26 @@
 
 #include <game_object.h>
 
+/**
+ * @brief Cloud class to render and move the clouds.
+ * Extend the GameObject parent class.
+ *
+ */
 class Cloud : public GameObject {
  public:
-  Cloud(int grid_width, int grid_height)
-      : GameObject(grid_width, grid_height) {
-    color = Colors().White;
-    speed = 1.0;
-  };
+  /**
+   * @brief Construct a new Cloud object
+   *
+   * @param grid_width  Needed from the Parent constructor
+   * @param grid_height Needed from the Parent constructor
+   */
+  Cloud(int grid_width, int grid_height);
+
+  /**
+   * @brief implement the parent pure virtual functions
+   */
   void Update();
-
-  void Render(SDL_Renderer *sdl_renderer, int screen_height, int screen_width, int grid_height, int grid_width);
-
- private:
-  int grid_width;
-  int grid_height;
+  void Render(SDL_Renderer *sdl_renderer, int screen_height, int screen_width);
 };
 
 #endif
