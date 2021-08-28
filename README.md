@@ -62,11 +62,9 @@ C++ Nanodegree Program` . In particular it is a game where you need to jump with
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -99,48 +97,27 @@ mkdir build
 cd build
 cmake ..
 make
-./Jump
+./Jump 
 ```
+One can pass the camera id according to `/dev/video*`, like `./Jump 1`, by default it is set to 0.
 
 You can choose to control the game using the keyboard. Make sure to set to false then the flag `BODY_CONTROL` in the [CMakeLists.txt](https://github.com/viciopoli01/Jump/blob/main/CMakeLists.txt#L8) file.
 
-
-
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+To run the game you need to have:
 
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/viciopoli01/Jump.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-
-
+* A camera plugged to your computer (or the laptop camera).
+* OpenCV installed (tested with OpenCV 3.2.0)
+* SDL2 installed
+* Tested with gcc 7.5.0
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Run the game, make sure you have enought space to move and jump before the blue cube hits the green cubes!
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/viciopoli01/Jump/issues) for a list of proposed features (and known issues).
-
+You can also select the `Debug` mode from the [CMakeLists.txt](https://github.com/viciopoli01/Jump/blob/main/CMakeLists.txt#L10) file, setting to true the `DEBUG` flag.
 
 
 <!-- CONTRIBUTING -->
@@ -166,16 +143,14 @@ Distributed under the GNU General Public License v3.0. See `LICENSE` for more in
 <!-- CONTACT -->
 ## Contact
 
-Project Link: [https://github.com/viciopoli01/Jump](https://github.com/viciopoli01/Jump)
 
-
+Vincenzo: [polivicio@gmail.com](mailto:polivicio@gmail.com)
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* []()
-* []()
-* []()
+* This game is build on the [Snake](https://github.com/udacity/CppND-Capstone-Hello-World) game provided in the Udacity course.
+* [README template](https://github.com/othneildrew/Best-README-Template)
 
 
 
