@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Set this flag to true if you want to paly jumping with yourself
 set(BODY_CONTROL true)
 # Set this flag to true if you want to debug the code
-set(DEBUG true)
+set(DEBUG false)
 
 add_definitions(-std=c++17)
 
