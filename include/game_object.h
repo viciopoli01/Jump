@@ -26,10 +26,10 @@ class GameObject {
   virtual void Update() = 0;
 
   /**
-   * @brief Pure vertual function for rendering the object. Each object has its
+   * @brief Pure virtual function for rendering the object. Each object has its
    * hown shape. this method implements and render the shape of the object.
    *
-   * @param sdl_renderer  SDL_Renderer obj, for rendering the object
+   * @param sdl_renderer  SDL_Renderer pointer, for rendering the object
    * @param screen_height screen height of the window the obj is going to be
    * rendered
    * @param screen_width  screen width of the window the obj is going to be
@@ -37,7 +37,7 @@ class GameObject {
    * @param grid_height   discretization of the window
    * @param grid_width    discretization of the window
    */
-  virtual void Render(SDL_Renderer *sdl_renderer, int screen_height,
+  virtual void Render(SDL_Renderer* sdl_renderer, int screen_height,
                       int screen_width) = 0;
 
   /**
@@ -67,7 +67,7 @@ class GameObject {
    * @return true   the two obj intersect
    * @return false  the two obj don't intersect
    */
-  bool colliding(GameObject const &other) const;
+  bool colliding(GameObject const& other) const;
 
   /**
    * @brief x and y position of the object. default position is the center of

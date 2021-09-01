@@ -66,6 +66,8 @@ C++ Nanodegree Program` . In particular it is a game where you need to jump with
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#structure">Structure</a></li>
+    <li><a href="#ribric">Rubric</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
@@ -101,7 +103,7 @@ make
 ```
 One can pass the camera id according to `/dev/video*`, like `./Jump 1`, by default it is set to 0.
 
-You can choose to control the game using the keyboard. Make sure to set to false then the flag `BODY_CONTROL` in the [CMakeLists.txt](https://github.com/viciopoli01/Jump/blob/main/CMakeLists.txt#L8) file.
+You can choose to control the game using the keyboard (jump pressing the spacebar). Make sure to set to false then the flag `BODY_CONTROL` in the [CMakeLists.txt](https://github.com/viciopoli01/Jump/blob/main/CMakeLists.txt#L8) file.
 
 ### Prerequisites
 
@@ -131,6 +133,97 @@ Contributions are what make the open source community such an amazing place to b
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+## Structure
+
+The folder structure is organized as follow:
+```
+  Jump
+  ├── cmake
+  │   └── FindSDL2_image.cmake
+  ├── CMakeLists.txt
+  ├── include
+  │   ├── body_controller.h
+  │   ├── cloud.h
+  │   ├── controller_general.h
+  │   ├── controller.h
+  │   ├── game.h
+  │   ├── game_object.h
+  │   ├── message_queue.h
+  │   ├── obstacle.h
+  │   ├── player.h
+  │   ├── renderer.h
+  │   └── types.h
+  ├── LICENSE
+  ├── media
+  │   ├── jump.png
+  │   ├── jump.xcf
+  │   ├── screenshot.png
+  │   └── structure
+  ├── README.md
+  └── src
+      ├── body_controller.cpp
+      ├── cloud.cpp
+      ├── controller.cpp
+      ├── game.cpp
+      ├── game_object.cpp
+      ├── main.cpp
+      ├── obstacle.cpp
+      ├── player.cpp
+      └── renderer.cpp
+```
+
+The `include` directory contains all the header files, while the `src` has all the scources with classes declaration (except for the types that is only an header with some data structure declared inside). 
+
+In the `cmake` there is a `FindSDL2_image.cmake` that is used by the `CMakeLists.txt` to find the SDL2 library.
+
+The class structure, when the `BODY_CONTROL` is `true`, is defined as follow:
+
+<p align="center">
+<a href="https://github.com/viciopoli01/Jump">
+<img src="media/structure.png" alt="Logo" width="100%" height="100%">
+</a>
+
+The main creates `Game`, `Renderer` and `BodyController` that starts a new thread that reads the camera id specified by the user. `Game` stores a `Player`, a vector of `Cloud` and vector of `Obstacle`.
+
+From the `main` the method `Game::run()` is called to start the game loop.
+
+In the game loop the the command from the body controller is read and the game status is passed, these tasks are accomplished using `MessageQueue`.
+
+
+The class structure, when the `BODY_CONTROL` is `false`, is defined as follow:
+
+<p align="center">
+<a href="https://github.com/viciopoli01/Jump">
+<img src="media/structure_easy.png" alt="Logo" width="100%" height="100%">
+</a>
+
+The main creates `Game`, `Renderer` and `Controller`. `Game` stores a `Player`, a vector of `Cloud` and vector of `Obstacle`.
+
+From the `main` the method `Game::run()` is called to start the game loop.
+
+
+## Rubric
+
+* **Loops, Functions, I/O**:
+  - The project implements C++ functions and control structures. 
+  - The project accepts user input and processes the input. ([main.cpp](https://github.com/viciopoli01/Jump/blob/main/src/main.cpp#L11))
+* **Object Oriented Programming**: In the classes GameObject, Cloud, Obstacle, Player, ControllerGeneral, BodyController, Controller, MessageQueue, Renderer, Game.
+  - The project uses Object Oriented Programming techniques.
+  - Classes use appropriate access specifiers for class members.
+  - Class constructors utilize member initialization lists.
+  - Classes abstract implementation details from their interfaces.
+  - Classes encapsulate behavior.
+  - Classes follow an appropriate inheritance hierarchy. (eg. GameObject and Player class)
+  - Derived class functions override virtual base class functions. (eg. Cloud, Player, Obstacle)
+  - Templates generalize functions in the project. (eg. the Game class)
+* **Memory Management**
+  - The project makes use of references in function declarations. (eg. `GameObject::colliding(GameObject const& other)`)
+  - The project uses destructors appropriately. (wait for the camera thread to finish in ~BodyController::BodyController())
+* **Concurrency**
+  - The project uses multithreading. (eg. `BodyController::start()`)
+  - A mutex or lock is used in the project (MessageQueue class).
+  - A condition variable is used in the project. (MessageQueue class).
 
 
 

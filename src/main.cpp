@@ -5,7 +5,7 @@
 
 #include "body_controller.h"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   int camera_id = 0;
   if (argc > 1) {
     camera_id = std::atoi(argv[1]);

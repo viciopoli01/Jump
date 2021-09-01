@@ -33,7 +33,7 @@ class Player : public GameObject {
    *
    */
   void Update();
-  void Render(SDL_Renderer *sdl_renderer, int screen_height, int screen_width);
+  void Render(SDL_Renderer* sdl_renderer, int screen_height, int screen_width);
 
   /**
    * @brief Set alive to false and end the game rendering.
