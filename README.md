@@ -181,7 +181,7 @@ The class structure, when the `BODY_CONTROL` is `true`, is defined as follow:
 
 <p align="center">
 <a href="https://github.com/viciopoli01/Jump">
-<img src="media/structure.png" alt="Logo" width="100%" height="100%">
+<img src="media/structure_camera.png" alt="Logo" width="100%" height="100%">
 </a>
 
 The main creates `Game`, `Renderer` and `BodyController` that starts a new thread that reads the camera id specified by the user. `Game` stores a `Player`, a vector of `Cloud` and vector of `Obstacle`.
@@ -194,7 +194,7 @@ The class structure, when the `BODY_CONTROL` is `false`, is defined as follow:
 
 <p align="center">
 <a href="https://github.com/viciopoli01/Jump">
-<img src="media/structure_easy.png" alt="Logo" width="100%" height="100%">
+<img src="media/structure_keyboard.png" alt="Logo" width="100%" height="100%">
 </a>
 
 The main creates `Game`, `Renderer` and `Controller`. `Game` stores a `Player`, a vector of `Cloud` and vector of `Obstacle`.
