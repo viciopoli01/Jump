@@ -190,7 +190,6 @@ From the `main` the method `Game::run()` is called to start the game loop.
 
 In the game loop the the command from the body controller is read and the game status is passed, these tasks are accomplished using `MessageQueue`.
 
-
 The class structure, when the `BODY_CONTROL` is `false`, is defined as follow:
 
 <p align="center">
